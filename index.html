@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Catatan Tiroid Surgery</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Public+Sans:wght@400;600;700&display=swap">
+<style>
+/* Layout: sticky chapter bar over a single reading column; each disease is a block of labelled rows (Sx, PE, Ix, Mx, Cx) so the page doubles as a study sheet. */
+:root{
+  --bg:#F6F4EE; --surface:#FCFBF7; --surface-2:#ECE8DC; --fg:#14302F; --muted:#34504D; --faint:#5C706D; --line:#DDD8C8;
+  --teal:#176A64; --coral:#B8402A; --ink:#14302F; --ink-fg:#F6F4EE; --ink-soft:#B9D2CE; --amber:#E8A557;
+  --display:'Libre Baskerville', Georgia, 'Times New Roman', serif;
+  --body:'Public Sans', Arial, Helvetica, sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F2221; --surface:#16302E; --surface-2:#1B3A37; --fg:#EAE6DA; --muted:#A9C4C0; --faint:#86A3A0; --line:#2A4A47;
+    --teal:#5CC2B8; --coral:#FF8A6B; --ink:#1E4542; --ink-fg:#F6F4EE; --ink-soft:#B9D2CE; --amber:#E8A557;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F2221; --surface:#16302E; --surface-2:#1B3A37; --fg:#EAE6DA; --muted:#A9C4C0; --faint:#86A3A0; --line:#2A4A47;
+  --teal:#5CC2B8; --coral:#FF8A6B; --ink:#1E4542; --ink-fg:#F6F4EE; --ink-soft:#B9D2CE; --amber:#E8A557;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--bg)}
+.wrap{max-width:1040px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);line-height:1.2;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:var(--teal)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:4px}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);
+  margin-left:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));margin-right:calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.bar nav{max-width:1040px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:thin}
+.bar a{flex:none;text-decoration:none;color:var(--muted);font-size:14px;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid transparent}
+.bar a:hover{border-color:var(--line)}
+.bar a.on{background:var(--ink);color:var(--ink-fg)}
+
+/* hero */
+.hero{padding-block:56px 40px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
+.eyebrow.hot{color:var(--coral)}
+.hero h1{font-size:clamp(34px,6vw,60px);margin-top:12px}
+.hero p.lead{margin-top:16px;max-width:60ch;color:var(--muted);font-size:19px}
+.thy{width:150px;height:auto}
+@media (max-width:640px){.hero{grid-template-columns:1fr}.thy{display:none}}
+
+/* sections */
+section.chap{padding-block:48px;border-top:1px solid var(--line)}
+section.chap > header{margin-bottom:24px;max-width:70ch}
+section.chap h2{font-size:clamp(26px,4vw,38px);margin-top:8px}
+section.chap header p{margin-top:12px;color:var(--muted)}
+h3{font-size:22px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.grid > *{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.card p,.card li{color:var(--muted)}
+.card ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px}
+.tag{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.tag.hot{color:var(--coral)}
+.dark{background:var(--ink);border-color:var(--ink);color:var(--ink-fg)}
+.dark p,.dark li{color:var(--ink-soft)}
+.dark .tag{color:var(--amber)}
+.dark h3{color:var(--ink-fg)}
+.note{margin-top:16px;padding:16px 20px;border-radius:12px;background:var(--surface-2);color:var(--muted);font-size:16px}
+.note b{color:var(--fg)}
+
+/* disease block */
+.dz{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,3vw,30px);margin-top:20px}
+.dz > h3{font-size:26px}
+.dz > .sub{color:var(--faint);font-size:15px;margin-top:4px}
+.rows{margin-top:16px;display:flex;flex-direction:column}
+.r{display:grid;grid-template-columns:64px 1fr;gap:16px;padding-block:14px;border-top:1px solid var(--line)}
+.r > *{min-width:0}
+.r b.k{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);padding-top:3px}
+.r b.k.hot{color:var(--coral)}
+.r p+p{margin-top:6px}
+.r p{color:var(--muted)}
+.r p strong{color:var(--fg)}
+@media (max-width:520px){.r{grid-template-columns:1fr;gap:4px}}
+
+/* flow */
+ol.flow{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;counter-reset:s}
+ol.flow li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 18px}
+ol.flow li::before{content:counter(s);font-family:var(--display);font-weight:700;font-size:28px;color:var(--coral)}
+ol.flow li:last-child{background:var(--ink);border-color:var(--ink);color:var(--ink-fg)}
+ol.flow li:last-child::before{color:var(--amber)}
+.phases{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));counter-reset:p}
+.phases > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;min-width:0}
+.phases h3{font-size:20px;margin-top:4px}
+.phases p{color:var(--muted);margin-top:6px;font-size:16px}
+
+/* tables */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:16px}
+th,td{text-align:left;padding:12px 16px;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--ink);color:var(--ink-fg);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+tr:last-child td{border-bottom:0}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td:first-child{font-weight:600}
+td{color:var(--muted)}
+td:first-child{color:var(--fg)}
+
+/* quiz */
+.qa{display:flex;flex-direction:column;gap:12px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between}
+.q p{flex:1 1 320px;min-width:0}
+.q button{font:inherit;font-weight:600;font-size:15px;padding:8px 16px;border-radius:999px;border:1px solid var(--teal);background:transparent;color:var(--teal);cursor:pointer}
+.q button:hover{background:var(--teal);color:var(--bg)}
+.q .ans{flex-basis:100%;font-weight:700;color:var(--coral);padding-top:4px;border-top:1px dashed var(--line)}
+.fact{font-family:var(--display);font-weight:700;color:var(--amber);font-size:19px}
+/* interactive */
+.sim{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:16px;margin-top:14px}
+@media (max-width:760px){.sim{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.panel h3{font-size:18px}
+.hint{font-size:14px;color:var(--faint)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:14px;font-weight:600;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+.chip:hover{border-color:var(--teal)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--ink-fg);border-color:var(--ink)}
+label.sl{display:flex;flex-direction:column;gap:6px;font-size:15px;font-weight:600}
+label.ck{display:flex;gap:8px;align-items:center;font-size:15px;font-weight:600}
+input[type=range]{width:100%;accent-color:var(--teal)}
+.meter{display:flex;flex-direction:column;gap:6px}
+.m-top{display:flex;justify-content:space-between;font-size:15px;font-weight:600}
+.m-track{position:relative;height:14px;border-radius:99px;background:var(--surface-2);overflow:hidden;border:1px solid var(--line)}
+.m-band{position:absolute;left:30%;width:40%;top:0;bottom:0;background:var(--teal);opacity:.16}
+.m-fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;transition:width .35s}
+@media (prefers-reduced-motion: reduce){.m-fill{transition:none}}
+.m-fill.lo{background:var(--teal)}.m-fill.ok{background:var(--muted)}.m-fill.hi{background:var(--coral)}
+.verdict{border-radius:12px;background:var(--ink);color:var(--ink-fg);padding:16px 18px}
+.verdict h3{color:var(--ink-fg);font-size:20px}
+.verdict p{color:var(--ink-soft);margin-top:6px;font-size:16px}
+.verdict .kv b{color:var(--amber)}
+.stepper{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:inherit;font-weight:600;font-size:15px;padding:9px 18px;border-radius:999px;border:1px solid var(--teal);background:var(--teal);color:var(--bg);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--teal)}
+.btn:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:6px}
+.dots i{width:100%;max-width:36px;height:6px;border-radius:3px;background:var(--line)}
+.dots i.on{background:var(--coral)}
+.chart{width:100%;height:auto;display:block}
+.chart text{fill:var(--faint);font-size:12px;font-family:var(--body)}
+.chart text.ph{fill:var(--fg);font-weight:700}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}
+.opt{font:inherit;text-align:left;font-size:15px;font-weight:600;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--teal)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--teal);background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--teal)}
+.opt.wrong{border-color:var(--coral);box-shadow:inset 0 0 0 1px var(--coral)}
+.opt small{display:block;font-weight:400;color:var(--muted)}
+.clues{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.clues li{display:grid;grid-template-columns:140px minmax(0,1fr);gap:12px;padding-top:10px;border-top:1px solid var(--line)}
+.clues li:first-child{border-top:0;padding-top:0}
+@media (max-width:520px){.clues li{grid-template-columns:1fr;gap:2px}}
+.score{display:flex;gap:18px;flex-wrap:wrap;font-size:15px;color:var(--muted)}
+.score b{color:var(--fg)}
+.fb{padding:14px 16px;border-radius:12px;background:var(--surface-2);color:var(--muted)}
+.fb strong{color:var(--fg)}
+#game{overflow-anchor:none}
+.study-btn{position:fixed;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));z-index:25;box-shadow:0 4px 18px rgba(0,0,0,.25)}
+.study-btn[aria-pressed="true"]{background:var(--coral);border-color:var(--coral);color:var(--bg)}
+body.study .r:not(.rev) p,body.study .r:not(.rev) p strong,body.study tbody tr:not(.rev) td:not(:first-child){color:transparent;text-shadow:0 0 9px var(--fg);cursor:pointer;user-select:none}
+footer{padding-block:40px 64px;border-top:1px solid var(--line);color:var(--faint);font-size:15px}
+</style>
+
+<div class="bar"><nav id="nav" aria-label="Bab">
+  <a href="#peta">Peta</a><a href="#tft">TFT</a><a href="#simulasi">Simulasi</a><a href="#bawaan">Bawaan</a><a href="#goitre">Simple goitre</a><a href="#hyper">Hyperthyroid</a><a href="#terapi">Terapi</a><a href="#tiroiditis">Thyroiditis</a><a href="#pembeda">Pembeda</a><a href="#kasus">Kasus</a><a href="#latihan">Latihan</a>
+</nav></div>
+
+<div class="wrap">
+<header class="hero">
+  <div>
+    <p class="eyebrow">Catatan Surgery · Neck/Thyroid Diseases</p>
+    <h1>Penyakit Tiroid dan Massa Leher</h1>
+    <p class="lead">Satu halaman untuk belajar: tiap penyakit dijelaskan dari mekanisme sampai terapi, dengan jalur gejala, pemeriksaan, dan komplikasi yang bisa dibaca urut.</p>
+    <p class="lead" style="font-size:16px;margin-top:10px">Yang bisa dimainkan: <a href="#simulasi">simulator TFT, mekanisme Graves, dan kurva De Quervain</a>, <a href="#kasus">12 kasus pasien virtual</a>, dan tombol Mode hafalan di pojok kanan bawah yang mengaburkan jawaban sampai kamu klik.</p>
+  </div>
+  <svg class="thy" viewBox="0 0 150 130" role="img" aria-label="Kelenjar tiroid: dua lobus dan satu isthmus">
+    <ellipse cx="45" cy="65" rx="34" ry="55" fill="#E8A557"/>
+    <ellipse cx="105" cy="65" rx="34" ry="55" fill="#E8A557"/>
+    <rect x="60" y="58" width="30" height="20" fill="#E8A557"/>
+  </svg>
+</header>
+
+<section class="chap" id="peta">
+  <header><p class="eyebrow">Gambaran umum</p><h2>Peta besar: delapan penyakit, empat kelompok</h2>
+  <p>Tiga pertanyaan menyaring hampir semuanya: ada nyeri atau tidak, TFT-nya hyper atau hypo, dan bentuk pembesaran lehernya.</p></header>
+  <div class="grid">
+    <div class="card"><span class="tag">Kelompok 1</span><h3>Bawaan</h3><p><b>Thyroglossal cyst</b><br>Sisa embrio di garis tengah leher.</p></div>
+    <div class="card"><span class="tag">Kelompok 2</span><h3>Pembesaran jinak</h3><p><b>Simple goitre</b><br>Kelenjar membesar, pasien euthyroid.</p></div>
+    <div class="card"><span class="tag hot">Kelompok 3</span><h3>Hyperthyroid</h3><p><b>Toxic adenoma, Toxic MNG, Graves disease</b><br>Hormon tiroid berlebih.</p></div>
+    <div class="card"><span class="tag">Kelompok 4</span><h3>Thyroiditis</h3><p><b>Hashimoto, De Quervain, Riedel</b><br>Peradangan kelenjar tiroid.</p></div>
+  </div>
+  <div class="note"><b>Singkatan di catatan:</b> Sx gejala · PE pemeriksaan fisik · Ix pemeriksaan penunjang · Mx tata laksana · Cx komplikasi · m/c paling sering · d/t disebabkan oleh · TRO menyingkirkan kemungkinan · MNG multinodular goitre · FNAC biopsi jarum halus · RAI iodium radioaktif.</div>
+</section>
+
+<section class="chap" id="tft">
+  <header><p class="eyebrow">Dasar yang dipakai terus</p><h2>Membaca TFT: kunci semua penyakit</h2>
+  <p>Anggap TSH sebagai tombol pengatur termostat dan T3/T4 sebagai suhu ruangan. Hormon berlebih menekan TSH turun, hormon kurang membuat TSH naik.</p></header>
+  <div class="tw"><table>
+    <thead><tr><th>Kondisi</th><th>TSH</th><th>T3 dan T4</th></tr></thead>
+    <tbody>
+      <tr><td>Hyperthyroid</td><td>Turun</td><td>Naik</td></tr>
+      <tr><td>Hypothyroid (overt)</td><td>Naik</td><td>Turun</td></tr>
+      <tr><td>Subclinical hypothyroid</td><td>Naik sedikit</td><td>Normal</td></tr>
+      <tr><td>Hashitoxicosis (Hashimoto awal)</td><td>Turun</td><td>Naik</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="chap" id="simulasi">
+  <header><p class="eyebrow">Interaktif</p><h2>Lab simulasi: mainkan hormonnya</h2>
+  <p>Tiga simulasi kecil untuk memahami mengapa TFT berubah. Angkanya skala relatif 0 sampai 100, bukan nilai laboratorium.</p></header>
+
+  <h3>1. Simulator TFT</h3>
+  <div class="sim">
+    <div class="panel">
+      <h3>Pilih kondisi</h3>
+      <div class="chips" id="presets"></div>
+      <h3>Atau geser sendiri</h3>
+      <label class="sl" for="s-tsh">TSH<input type="range" id="s-tsh" min="0" max="100" value="50"></label>
+      <label class="sl" for="s-t">T3 dan T4<input type="range" id="s-t" min="0" max="100" value="50"></label>
+      <label class="ck" for="fb"><input type="checkbox" id="fb">Umpan balik normal: TSH otomatis mengikuti T3/T4</label>
+      <p class="hint">Bagian yang diarsir di bar adalah rentang normal. Nyalakan umpan balik, lalu naikkan T3/T4 dan lihat TSH turun. Matikan untuk memecahkan termostatnya.</p>
+    </div>
+    <div class="panel">
+      <div id="meters1" style="display:flex;flex-direction:column;gap:14px"></div>
+      <div class="verdict" id="verdict" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:36px">2. Graves selangkah demi selangkah</h3>
+  <div class="sim">
+    <div class="panel">
+      <div class="dots" id="gdots"></div>
+      <h3 id="gt"></h3>
+      <p id="gx" style="color:var(--muted)" aria-live="polite"></p>
+      <div class="stepper">
+        <button class="btn ghost" id="gprev" type="button">Sebelumnya</button>
+        <button class="btn" id="gnext" type="button">Berikutnya</button>
+        <button class="btn ghost" id="grst" type="button">Ulang</button>
+      </div>
+    </div>
+    <div class="panel"><div id="meters2" style="display:flex;flex-direction:column;gap:14px"></div></div>
+  </div>
+
+  <h3 style="margin-top:36px">3. De Quervain: geser waktunya</h3>
+  <div class="panel" style="margin-top:14px">
+    <label class="sl" for="wk">Minggu sejak onset: <span id="wkv">0</span><input type="range" id="wk" min="0" max="20" step="0.5" value="0"></label>
+    <svg id="dq" class="chart" viewBox="0 0 640 250" role="img" aria-label="Kurva skematis T3/T4 dan TSH selama tiga fase De Quervain"></svg>
+    <p class="hint">Garis tebal utuh adalah T3/T4. Garis putus-putus adalah TSH. Kurva berupa skema; lamanya fase mengikuti catatan: fase 1 sekitar 2 sampai 3 minggu, fase 2 sekitar 6 sampai 12 minggu.</p>
+    <div class="verdict" id="dqv" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="chap" id="bawaan">
+  <header><p class="eyebrow">Bawaan</p><h2>Thyroglossal cyst: sisa embriologi</h2>
+  <p>Ini bukan penyakit kelenjar tiroid, melainkan sisa jalur perkembangan. Sekitar 7% populasi dunia memilikinya.</p></header>
+  <ol class="flow">
+    <li>Seharusnya thyroglossal duct menutup dan mengecil (involusi) sebelum minggu ke-10 kehamilan.</li>
+    <li>Duct gagal menutup, lapisan epitelnya tertinggal di garis tengah leher.</li>
+    <li>Epitel sisa mengeluarkan sekret, terjadi radang, lalu terbentuk kista.</li>
+  </ol>
+  <div class="dz"><h3>Klinis dan terapi</h3>
+    <div class="rows">
+      <div class="r"><b class="k">Sx</b><p>Benjolan di garis tengah leher dekat tulang hyoid. Ikut bergerak saat lidah dijulurkan dan saat menelan. Nyeri tekan bila terinfeksi, bisa menjadi abscess.</p></div>
+      <div class="r"><b class="k">Ix</b><p>Ultrasound leher. FBC: WCC naik bila infeksi, ditambah septic workup. TFT bila dicurigai jaringan tiroid ektopik.</p></div>
+      <div class="r"><b class="k hot">Mx</b><p><strong>Sistrunk procedure</strong>, untuk mencegah infeksi berulang dan risiko keganasan yang kecil.</p></div>
+      <div class="r"><b class="k hot">Cx</b><p>Pengangkatan tidak tuntas, kista pecah saat operasi, perdarahan, cedera laryngotracheal, infeksi.</p></div>
+    </div></div>
+</section>
+
+<section class="chap" id="goitre">
+  <header><p class="eyebrow">Pembesaran jinak</p><h2>Simple goitre</h2>
+  <p>Lesi jinak. Kelenjar membesar karena ada yang terus mendorongnya tumbuh: bahan baku kurang, zat pengganggu, atau kebutuhan hormon yang naik.</p></header>
+  <div class="grid">
+    <div class="card"><h3>Kurang iodine</h3><p>Tubuh butuh sekitar 0,1 sampai 0,15 mg per hari.</p></div>
+    <div class="card"><h3>Goitrogen</h3><p>Sayur brassica seperti kubis dan kale (mengandung thiocyanate). Obat antitiroid: carbimazole dan thiouracil.</p></div>
+    <div class="card"><h3>Fisiologis dan lainnya</h3><p>Pubertas, kehamilan, riwayat keluarga (defek genetik), dan jarang, sekresi TSH berlebih dari microadenoma hipofisis.</p></div>
+  </div>
+  <div class="dz"><h3>Klinis dan terapi</h3><p class="sub">Dua bentuk: diffuse goitre dan nodular goitre.</p>
+    <div class="rows">
+      <div class="r"><b class="k">PE</b><p>Pasien euthyroid. Leher teraba dan sering terlihat, halus, kenyal-keras, tidak nyeri, bergerak saat menelan.</p><p>Bila besar muncul gejala penekanan: sesak yang memburuk saat berbaring (trakea tertekan), napas berisik, dysphagia.</p></div>
+      <div class="r"><b class="k">Ix</b><p>TFT untuk menyingkirkan hyperthyroid ringan. Antibodi tiroid untuk membedakan dari thyroiditis autoimun. Ultrasound leher; CT leher dan dada bila ada gejala penekanan. FNAC bila ada swelling dominan atau nodul lebih dari 1 cm.</p></div>
+      <div class="r"><b class="k hot">Mx</b><p><strong>Gaya hidup:</strong> garam beryodium, hindari goitrogen. <strong>Obat:</strong> thyroxine pada goitre hiperplastik stadium awal. <strong>Operasi:</strong> total thyroidectomy plus thyroxine, atau reseksi parsial untuk menjaga fungsi. Indikasi: gejala penekanan atau alasan kosmetik.</p></div>
+    </div></div>
+</section>
+
+<section class="chap" id="hyper">
+  <header><p class="eyebrow hot">Hyperthyroidism</p><h2>Toxic adenoma, toxic MNG, dan Graves</h2>
+  <p>Tiga penyebab hyperthyroid. Bedanya ada di bentuk kelenjar, ada tidaknya bruit, dan pola RAI uptake.</p></header>
+
+  <div class="tw"><table>
+    <thead><tr><th>Aspek</th><th>Toxic adenoma</th><th>Toxic MNG (Plummer)</th><th>Graves disease</th></tr></thead>
+    <tbody>
+      <tr><td>Bentuk leher</td><td>Satu nodul (solitary); perlu TRO malignancy</td><td>Multinodular, atau satu nodul dominan</td><td>Diffuse</td></tr>
+      <tr><td>Bruit</td><td>Tidak ada</td><td>Tidak ada</td><td>Ada</td></tr>
+      <tr><td>Epidemiologi</td><td>Penyebab ke-3 tersering; perempuan lebih sering</td><td>Penyebab ke-2 tersering; usia di atas 50 tahun</td><td>Penyebab tersering; usia 15 sampai 45 tahun</td></tr>
+      <tr><td>Faktor risiko</td><td>Iodine deficiency, mutasi genetik</td><td>Iodine deficiency, genetik, rokok, stres, perempuan</td><td>Pemicu: kehamilan (postpartum), iodine berlebih, infeksi, stres, rokok</td></tr>
+      <tr><td>USG</td><td>Nodul iso/hyperechoic</td><td>Multinodular dalam parenkim</td><td>Hypervascular</td></tr>
+      <tr><td>RAI uptake</td><td>Focal (hot nodule)</td><td>Heterogeneous</td><td>Tinggi dan diffuse</td></tr>
+    </tbody></table></div>
+  <p class="note">Pengelompokan epidemiologi dan faktor risiko untuk toxic adenoma dan toxic MNG disusun dari kolom catatan yang berdampingan. Cek lagi ke PDF aslinya bila perlu.</p>
+
+  <h3 style="margin-top:36px">Mekanisme Graves</h3>
+  <p style="color:var(--muted);margin:8px 0 16px">Pada keadaan normal hanya TSH yang menyuruh tiroid bekerja. Pada Graves, antibodi meniru TSH dan menyalakan reseptornya terus-menerus.</p>
+  <ol class="flow">
+    <li>Defek pada sel T-suppressor.</li>
+    <li>Sel B memproduksi TSI (thyroid stimulating immunoglobulin).</li>
+    <li>TSI menempel dan merangsang reseptor TSH.</li>
+    <li>Sintesis hormon tiroid naik dan kelenjar ikut tumbuh.</li>
+    <li>Hasilnya hyperthyroidism dan thyromegaly.</li>
+  </ol>
+
+  <h3 style="margin-top:36px">Gejala dan tanda hyperthyroidism</h3>
+  <div class="grid" style="margin-top:14px">
+    <div class="card"><h3>Metabolik</h3><ul><li>Tidak tahan panas, berkeringat</li><li>Mudah lelah</li><li>Berat badan turun walau nafsu makan baik</li><li>BAB cair</li><li>Polyuria</li></ul></div>
+    <div class="card"><h3>Jantung dan saraf</h3><ul><li>Palpitasi, tachycardia</li><li>Atrial fibrillation</li><li>Tanda gagal jantung: edema, crepts, JVP naik</li><li>Tremor halus, hyperreflexia</li><li>Insomnia, cemas</li></ul></div>
+    <div class="card"><h3>Otot dan kulit</h3><ul><li>Otot proksimal lemah (sulit bangun dari jongkok)</li><li>Kulit hangat dan lembap, rambut rontok, pruritus</li><li>Palmar erythema, onycholysis</li><li>Pretibial myxoedema: bercak merah menonjol di tulang kering</li></ul></div>
+    <div class="card"><h3>Reproduksi</h3><ul><li>Oligomenorrhea atau amenorrhea pada perempuan</li><li>Libido menurun pada laki-laki</li><li>Pembesaran leher (goitre)</li></ul></div>
+  </div>
+
+  <div class="dz"><h3>Mata pada Graves</h3>
+    <div class="rows">
+      <div class="r"><b class="k hot">Tanda</b><p><strong>Exophthalmos adalah pathognomonic untuk Graves.</strong> Tanda lain: lid retraction, ophthalmoplegia, chemosis.</p></div>
+      <div class="r"><b class="k">Sx</b><p>Kelopak bengkak, nyeri mata, konjungtiva merah, penglihatan ganda.</p></div>
+    </div></div>
+
+  <div class="dz"><h3>Pemeriksaan penunjang hyperthyroidism</h3>
+    <div class="rows">
+      <div class="r"><b class="k">Lab</b><p>TFT: TSH turun, T3 dan T4 naik. TRAb pada Graves: TSI dan TBI immunoglobulin. FBC: bisa anemia (AIHA, pernicious anemia) karena terkait autoimun.</p></div>
+      <div class="r"><b class="k">Lain</b><p>ECG: sinus tachycardia atau atrial fibrillation. CXR bila ada gejala gagal jantung. CT atau MRI orbit untuk orbitopathy tanpa hyperthyroidism. FNAC bila USG mencurigakan.</p></div>
+    </div></div>
+</section>
+
+<section class="chap" id="terapi">
+  <header><p class="eyebrow hot">Hyperthyroidism</p><h2>Terapi dan komplikasi</h2>
+  <p>Tiga jalur bekerja dengan cara berbeda: obat menahan produksi, RAI menghancurkan jaringan dari dalam, operasi mengangkat kelenjar.</p></header>
+  <div class="grid">
+    <div class="card"><span class="tag">Jalur 1</span><h3>Obat</h3>
+      <p><b>Antithyroid (thionamides):</b> methimazole, carbimazole, propylthiouracil. Efek samping: ruam kulit, agranulocytosis (jarang), hepatotoxicity.</p>
+      <p><b>Beta blocker</b> non-selektif seperti propranolol meredakan gejala. Verapamil untuk pasien asma.</p></div>
+    <div class="card"><span class="tag">Jalur 2</span><h3>Radioactive iodine</h3>
+      <p>Iodine terkumpul di tiroid dan merusak kelenjar lewat radiasi lokal.</p>
+      <p>Indikasi: komorbid berisiko untuk operasi, atau kontraindikasi thioamides. Komplikasi: hypothyroidism.</p></div>
+    <div class="card dark"><span class="tag">Jalur 3</span><h3>Operasi</h3>
+      <p>Total atau subtotal thyroidectomy.</p>
+      <p>Indikasi: dicurigai kanker tiroid, gejala penekanan, permintaan pasien (misalnya kosmetik), atau gagal dengan terapi medis dan RAI.</p></div>
+  </div>
+
+  <h3 style="margin-top:36px">Komplikasi operasi tiroid</h3>
+  <div class="tw" style="margin-top:14px"><table>
+    <thead><tr><th>Komplikasi</th><th>Akibat</th></tr></thead>
+    <tbody>
+      <tr><td>Perdarahan pasca operasi</td><td>Hematoma</td></tr>
+      <tr><td>Cedera recurrent laryngeal nerve (RLN)</td><td>Suara serak (hoarseness)</td></tr>
+      <tr><td>Cedera cabang eksternal superior laryngeal nerve</td><td>Tidak bisa bersuara tinggi</td></tr>
+      <tr><td>Hypocalcemia sementara</td><td>Transient</td></tr>
+      <tr><td>Hypoparathyroidism permanen</td><td>Menetap</td></tr>
+      <tr><td>Hypothyroidism</td><td>Hormon tiroid menjadi kurang</td></tr>
+    </tbody></table></div>
+  <p class="note">Kalsium bisa turun karena kelenjar parathyroid terletak sangat dekat dengan tiroid dan bisa ikut terganggu saat operasi.</p>
+
+  <h3 style="margin-top:36px">Komplikasi hyperthyroidism yang tidak diobati</h3>
+  <div class="grid" style="margin-top:14px">
+    <div class="card dark"><span class="tag">Paling berbahaya</span><h3>Thyroid storm</h3><p>Krisis hyperthyroid yang mengancam nyawa, dinilai dengan skor Burch-Wartofsky.</p></div>
+    <div class="card"><span class="tag hot">Jantung</span><h3>Heart failure</h3><p>Jantung dipaksa berdenyut cepat terus-menerus, lama-lama gagal.</p></div>
+    <div class="card"><span class="tag hot">Irama jantung</span><h3>Atrial fibrillation</h3><p>Bisa berlanjut menjadi stroke, heart failure, MI, dan DVT.</p></div>
+  </div>
+</section>
+
+<section class="chap" id="tiroiditis">
+  <header><p class="eyebrow">Thyroiditis</p><h2>Hashimoto, De Quervain, Riedel</h2>
+  <p>Satu kata kunci per penyakit: Hashimoto autoimun dan berakhir hypothyroid, De Quervain nyeri dan sembuh sendiri, Riedel sekeras batu karena fibrosis.</p></header>
+
+  <div class="dz" style="margin-top:0"><h3>Hashimoto thyroiditis</h3><p class="sub">Chronic autoimmune thyroiditis atau chronic lymphocytic thyroiditis</p>
+    <div class="rows">
+      <div class="r"><b class="k">Dasar</b><p>Sistem imun menghancurkan sel folikel tiroid. Faktor risiko: perempuan, kerentanan genetik (Down syndrome, Turner syndrome, HLA tertentu), penyakit autoimun lain pada pasien atau keluarga, rokok, asupan iodine tinggi, stres dan infeksi.</p></div>
+      <div class="r"><b class="k">Sx</b><p>Benjolan leher muncul perlahan atau cepat, sering nyeri terutama bila cepat, nyeri hilang timbul dan ukuran berubah-ubah. Gejala sistemik: thyrotoxicosis ringan atau myxoedema.</p></div>
+      <div class="r"><b class="k">PE</b><p>Unilateral atau bilateral, halus, tepi jelas, kenyal seperti karet, bergerak saat menelan, tidak melekat, kelenjar getah bening tidak membesar.</p></div>
+      <div class="r"><b class="k">Ix</b><p>Antibodi thyroid peroxidase dan thyroglobulin. USG: diffuse hypoechogenicity. RAI uptake turun pada thyrotoxicosis transient. FNAC.</p></div>
+      <div class="r"><b class="k hot">Mx</b><p><strong>Levothyroxine seumur hidup,</strong> sekitar 1,6 µg/kg/hari. Cek TSH 6 minggu setelah mulai, lalu tiap 6 sampai 12 bulan. Diminum pagi saat perut kosong, jangan bersamaan dengan suplemen besi atau kalsium, aluminum hydroxide, dan PPI. Thyroidectomy bila goitre membesar, ada gejala penekanan, atau dicurigai ganas.</p></div>
+    </div>
+    <h3 style="margin-top:20px;font-size:18px">Perjalanan TFT</h3>
+    <div class="phases" style="margin-top:10px">
+      <div><span class="tag hot">Awal</span><h3>Hashitoxicosis</h3><p>TSH turun, free T3 dan T4 naik.</p></div>
+      <div><span class="tag">Progresi</span><h3>Subclinical hypothyroid</h3><p>TSH naik sedikit, free T3 dan T4 normal.</p></div>
+      <div><span class="tag">Lanjut</span><h3>Overt hypothyroid</h3><p>TSH naik, free T3 dan T4 turun.</p></div>
+    </div>
+  </div>
+
+  <div class="dz"><h3>De Quervain thyroiditis</h3><p class="sub">Subacute granulomatous thyroiditis. Sembuh sendiri dalam 1 sampai 3 bulan.</p>
+    <div class="phases" style="margin-top:16px">
+      <div><span class="tag hot">Fase 1</span><h3>Thyrotoxicosis</h3><p>2 sampai 3 minggu, puncak sekitar 1 minggu setelah onset. TSH turun, T3 dan T4 naik.</p></div>
+      <div><span class="tag">Fase 2</span><h3>Hypothyroidism</h3><p>6 sampai 12 minggu. TSH naik, T3 dan T4 turun.</p></div>
+      <div><span class="tag">Fase 3</span><h3>Euthyroid</h3><p>Sel folikel pulih, fungsi kembali normal.</p></div>
+    </div>
+    <p class="note"><b>Mengapa hyper dulu, baru hypo?</b> Radang akut (giant cells dan lymphocytes) merobek folikel, sehingga hormon yang tersimpan bocor keluar. Produksi tidak naik. Setelah cadangan habis, hormon turun sampai sel pulih. Karena hanya bocor, RAI uptake turun pada fase hyper.</p>
+    <div class="rows">
+      <div class="r"><b class="k">Sx</b><p>Didahului URTI, lalu demam, malaise, lelah. Keluhan utama leher bengkak mendadak dan nyeri, menjalar ke rahang dan telinga, memberat saat menelan, batuk, atau menggerakkan leher. PE: diffuse, firm, tender.</p></div>
+      <div class="r"><b class="k">Ix</b><p>TFT sesuai fase, serum thyroglobulin naik, WBC naik, ESR dan CRP naik (normal saat fase hypo). USG: hypoechoic diffuse atau fokal, vaskularisasi rendah, tepi kabur. FNAC.</p></div>
+      <div class="r"><b class="k hot">Mx</b><p>Nyeri: NSAIDs atau prednisolone. Gejala hyper: beta blocker. Fase hypo: levothyroxine.</p></div>
+    </div>
+  </div>
+
+  <div class="dz"><h3>Riedel thyroiditis</h3><p class="sub">Langka. Kelenjar digantikan jaringan fibrosa padat dan bisa menembus keluar kelenjar. Bisa disangka karsinoma.</p>
+    <ol class="flow" style="margin-top:16px">
+      <li>Inflamasi kronis pada tiroid.</li>
+      <li>Parenkim dan struktur sekitarnya diganti jaringan fibrosa padat.</li>
+      <li>Sel folikel rusak: hypothyroidism dan gejala penekanan.</li>
+    </ol>
+    <div class="rows">
+      <div class="r"><b class="k">Sx</b><p>Leher tumbuh lambat, sekeras batu, tepi tidak rata, tidak nyeri, bergerak saat menelan tetapi bisa melekat ke sekitar. Gejala penekanan: sesak, dysphagia, stridor (RLN terlibat).</p></div>
+      <div class="r"><b class="k">Ix</b><p>TSH naik dan T3 T4 turun pada 74% kasus. USG: massa hypoechoic dan hypovascular yang menembus jaringan di luar tiroid, kadang membungkus carotid. FNAC dan biopsi jaringan untuk menyingkirkan keganasan.</p></div>
+      <div class="r"><b class="k hot">Mx</b><p>Corticosteroid. Tamoxifen (SERM) memicu TGF-beta yang menghambat pertumbuhan sehingga massa mengecil. Mycophenolate mofetil (imunosupresan anti-fibrotik). Operasi subtotal atau partial thyroidectomy bila ada gejala penekanan.</p></div>
+      <div class="r"><b class="k hot">Cx</b><p>Tracheal compression (dyspnea, stridor, gagal napas), venous thrombosis karena pembuluh leher tersumbat, Horner syndrome bila SNS trunk terlibat.</p></div>
+    </div>
+    <p class="note">Komplikasi Riedel ditempatkan dari tata letak catatan. Cek lagi ke PDF aslinya.</p>
+  </div>
+</section>
+
+<section class="chap" id="pembeda">
+  <header><p class="eyebrow">Pembeda cepat</p><h2>Cara membedakan benjolan di leher</h2></header>
+  <div class="tw"><table>
+    <thead><tr><th>Penyakit</th><th>Ciri khas leher dan klinis</th></tr></thead>
+    <tbody>
+      <tr><td>Thyroglossal cyst</td><td>Garis tengah dekat hyoid; bergerak saat lidah dijulurkan dan menelan</td></tr>
+      <tr><td>Simple goitre</td><td>Halus, kenyal, tidak nyeri; pasien euthyroid</td></tr>
+      <tr><td>Graves disease</td><td>Diffuse dengan bruit; hyperthyroid dan exophthalmos</td></tr>
+      <tr><td>Toxic adenoma</td><td>Satu nodul, tanpa bruit; hot nodule di RAI</td></tr>
+      <tr><td>Toxic MNG</td><td>Multinodular atau satu nodul dominan, tanpa bruit; usia di atas 50 tahun</td></tr>
+      <tr><td>Hashimoto</td><td>Kenyal seperti karet, halus, tepi jelas; bisa nyeri; berakhir hypothyroid</td></tr>
+      <tr><td>De Quervain</td><td>Diffuse, firm, nyeri tekan; setelah URTI; tiga fase dan sembuh sendiri</td></tr>
+      <tr><td>Riedel</td><td>Sekeras batu, tidak nyeri, tepi tidak rata; bisa melekat ke sekitar</td></tr>
+    </tbody></table></div>
+
+  <h3 style="margin-top:36px">Kapan USG menuntut FNAC</h3>
+  <p style="color:var(--muted);margin:8px 0 14px">Lakukan FNAC bila ada kelenjar getah bening mencurigakan, atau nodul solid hypoechoic disertai salah satu tanda berikut.</p>
+  <div class="grid">
+    <div class="card"><b>Tepi tidak rata</b><p>Irregular margins</p></div>
+    <div class="card"><b>Vaskularisasi internal meningkat</b><p>Increased internal vascularity</p></div>
+    <div class="card"><b>Lebih tinggi daripada lebar</b><p>Taller-than-wide</p></div>
+    <div class="card"><b>Mikrokalsifikasi tersebar</b><p>Scattered microcalcifications</p></div>
+    <div class="card"><b>Menembus kapsul tiroid</b><p>Extrathyroidal extension</p></div>
+    <div class="card"><b>Bayangan di belakang nodul</b><p>Posterior acoustic shadowing</p></div>
+  </div>
+  <p class="note">Rujukan di catatan: <a href="https://radiologyassistant.nl/head-neck/ti-rads/ti-rads">TI-RADS (radiologyassistant.nl)</a></p>
+
+  <h3 style="margin-top:36px">Sembilan fakta yang wajib diingat</h3>
+  <div class="grid" style="margin-top:14px">
+    <div class="card dark"><p class="fact">Exophthalmos</p><p>Pathognomonic untuk Graves disease.</p></div>
+    <div class="card dark"><p class="fact">Graves</p><p>Penyebab hyperthyroidism tersering; usia 15 sampai 45 tahun.</p></div>
+    <div class="card dark"><p class="fact">Toxic MNG dan adenoma</p><p>Penyebab ke-2 dan ke-3 tersering.</p></div>
+    <div class="card dark"><p class="fact">Sistrunk</p><p>Operasi untuk thyroglossal cyst.</p></div>
+    <div class="card dark"><p class="fact">Levothyroxine</p><p>Seumur hidup pada Hashimoto; jangan dengan besi, kalsium, PPI.</p></div>
+    <div class="card dark"><p class="fact">Triphasic</p><p>Khas De Quervain: thyrotoxic, hypothyroid, euthyroid.</p></div>
+    <div class="card dark"><p class="fact">Stony hard</p><p>Riedel thyroiditis; tidak nyeri, bisa melekat.</p></div>
+    <div class="card dark"><p class="fact">Burch-Wartofsky</p><p>Skor untuk thyroid storm.</p></div>
+    <div class="card dark"><p class="fact">RLN</p><p>Cedera saat tiroidektomi membuat suara serak.</p></div>
+  </div>
+</section>
+
+<section class="chap" id="kasus">
+  <header><p class="eyebrow">Interaktif</p><h2>Pasien virtual: tegakkan diagnosisnya</h2>
+  <p>Mulai dari keluhan saja. Tiap petunjuk tambahan mengurangi poin: 4 poin bila benar dengan satu petunjuk, 1 poin bila perlu keempatnya.</p></header>
+  <div class="panel" id="game" style="gap:16px"></div>
+</section>
+
+<section class="chap" id="latihan">
+  <header><p class="eyebrow">Active recall</p><h2>Latihan: tebak diagnosisnya</h2>
+  <p>Jawab dulu di kepala, baru buka jawabannya. Kalau salah, kembali ke bab mekanismenya.</p></header>
+  <div class="qa" id="qa">
+    <div class="q"><p>Leher diffuse dengan bruit, exophthalmos, TSH turun.</p><button type="button" id="b1" aria-expanded="false" aria-controls="a1">Lihat jawaban</button><p class="ans" id="a1" hidden>Graves disease</p></div>
+    <div class="q"><p>Benjolan midline dekat hyoid, ikut bergerak saat lidah dijulurkan. Terapinya?</p><button type="button" id="b2" aria-expanded="false" aria-controls="a2">Lihat jawaban</button><p class="ans" id="a2" hidden>Sistrunk procedure</p></div>
+    <div class="q"><p>Nyeri leher mendadak setelah URTI; TFT hyper lalu hypo; sembuh sendiri.</p><button type="button" id="b3" aria-expanded="false" aria-controls="a3">Lihat jawaban</button><p class="ans" id="a3" hidden>De Quervain thyroiditis</p></div>
+    <div class="q"><p>Massa leher sekeras batu, tidak nyeri, bisa melekat ke sekitar.</p><button type="button" id="b4" aria-expanded="false" aria-controls="a4">Lihat jawaban</button><p class="ans" id="a4" hidden>Riedel thyroiditis</p></div>
+    <div class="q"><p>TSH rendah, T3 dan T4 tinggi, RAI uptake focal (hot nodule).</p><button type="button" id="b5" aria-expanded="false" aria-controls="a5">Lihat jawaban</button><p class="ans" id="a5" hidden>Toxic adenoma</p></div>
+    <div class="q"><p>Zat apa yang tidak boleh diminum bersamaan dengan levothyroxine?</p><button type="button" id="b6" aria-expanded="false" aria-controls="a6">Lihat jawaban</button><p class="ans" id="a6" hidden>Besi, kalsium, aluminum hydroxide, PPI</p></div>
+    <div class="q"><p>Suara serak setelah tiroidektomi.</p><button type="button" id="b7" aria-expanded="false" aria-controls="a7">Lihat jawaban</button><p class="ans" id="a7" hidden>Cedera RLN</p></div>
+  </div>
+</section>
+
+<footer>Disusun dari file NOTES SURGERY (bagian Neck/Thyroid Diseases). Penjelasan analogi dan urutan belajar ditambahkan untuk membantu memahami; fakta klinis mengikuti catatan.</footer>
+</div>
+
+<script>
+(function(){
+  var qa=document.getElementById('qa');
+  if(qa){qa.addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b)return;
+    var a=document.getElementById(b.getAttribute('aria-controls'));
+    var open=a.hidden;a.hidden=!open;
+    b.setAttribute('aria-expanded',String(open));
+    b.textContent=open?'Sembunyikan':'Lihat jawaban';
+  });}
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var map={};links.forEach(function(l){map[l.getAttribute('href').slice(1)]=l;});
+  links.forEach(function(l){l.addEventListener('click',function(){
+    window.__lock=true;
+    links.forEach(function(x){x.classList.remove('on');});l.classList.add('on');
+    setTimeout(function(){window.__lock=false;},500);
+  });});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(en){
+        if(en.isIntersecting&&!window.__lock){links.forEach(function(l){l.classList.remove('on');});
+          var l=map[en.target.id];if(l){l.classList.add('on');var nv=l.parentNode,r=l.getBoundingClientRect(),nr=nv.getBoundingClientRect();nv.scrollLeft+=r.left-nr.left-(nr.width-r.width)/2;}}
+      });
+    },{rootMargin:'-20% 0px -70% 0px'});
+    Object.keys(map).forEach(function(id){var s=document.getElementById(id);if(s)io.observe(s);});
+  }
+})();
+</script>
+
+<button type="button" class="btn study-btn" id="studyBtn" aria-pressed="false">Mode hafalan: mati</button>
+
+<script>
+(function(){
+  function $(id){return document.getElementById(id);}
+  function band(v){return v<30?'Rendah':(v>70?'Tinggi':'Normal');}
+  function tshLab(v){return v<30?'Rendah':(v<=70?'Normal':(v<=82?'Naik sedikit':'Tinggi'));}
+  function cls(v){return v<30?'lo':(v>70?'hi':'ok');}
+  function makeMeters(host,defs){
+    host.innerHTML='';
+    var refs={};
+    defs.forEach(function(d){
+      var w=document.createElement('div');w.className='meter';
+      w.innerHTML='<div class="m-top"><span>'+d.label+'</span><b></b></div><div class="m-track"><i class="m-band"></i><i class="m-fill"></i></div>';
+      host.appendChild(w);
+      refs[d.key]={t:w.querySelector('b'),f:w.querySelector('.m-fill'),lab:d.lab||band};
+    });
+    return function(vals){
+      Object.keys(refs).forEach(function(k){
+        var v=vals[k],r=refs[k];
+        r.f.style.width=v+'%';r.f.className='m-fill '+cls(v);r.t.textContent=r.lab(v);
+      });
+    };
+  }
+
+  /* 1. Simulator TFT */
+  var P=[
+    {id:'normal',n:'Normal',tsh:50,t:50,rai:'Normal',txt:'Umpan balik seimbang: hormon cukup, jadi TSH tidak perlu menyuruh kelenjar bekerja lebih.',cand:'Tidak ada kelainan.'},
+    {id:'graves',n:'Graves disease',tsh:8,t:92,rai:'Tinggi dan diffuse',txt:'TSI meniru TSH dan menyalakan reseptor terus-menerus. Hormon naik, TSH ditekan, kelenjar ikut tumbuh.',cand:'Leher diffuse dengan bruit, exophthalmos, TRAb positif.'},
+    {id:'adenoma',n:'Toxic adenoma',tsh:10,t:80,rai:'Focal (hot nodule)',txt:'Satu nodul membuat hormon sendiri. Hormon naik dan TSH turun, tetapi hanya nodul itu yang menyala di scan.',cand:'Satu nodul teraba, tanpa bruit.'},
+    {id:'mng',n:'Toxic MNG',tsh:12,t:75,rai:'Heterogeneous',txt:'Banyak nodul dengan aktivitas tidak merata, sehingga uptake RAI juga tidak merata.',cand:'Leher multinodular, tanpa bruit, usia di atas 50 tahun.'},
+    {id:'hashitox',n:'Hashitoxicosis',tsh:12,t:75,rai:'Turun (transient thyrotoxicosis)',txt:'Awal Hashimoto: sel folikel rusak dan hormon tersimpan bocor keluar untuk sementara.',cand:'Leher kenyal seperti karet, antibodi TPO dan thyroglobulin positif.'},
+    {id:'subclin',n:'Subclinical hypothyroid',tsh:77,t:50,rai:'-',txt:'Hashimoto yang sedang berprogresi: TSH naik sedikit untuk mengimbangi, T3 dan T4 masih normal.',cand:'Hashimoto fase progresi.'},
+    {id:'overt',n:'Overt hypothyroid',tsh:92,t:12,rai:'-',txt:'Sel tiroid sudah banyak hilang. Hormon turun walau TSH sudah tinggi.',cand:'Hashimoto lanjut, De Quervain fase 2, atau Riedel (TSH naik dan T3 T4 turun pada 74% kasus).'},
+    {id:'dq1',n:'De Quervain fase 1',tsh:10,t:80,rai:'Turun',txt:'Folikel robek karena radang akut dan hormon tersimpan tumpah. Produksi tidak naik, jadi uptake RAI rendah.',cand:'Leher nyeri setelah URTI, ESR dan CRP naik.'},
+    {id:'dq2',n:'De Quervain fase 2',tsh:88,t:18,rai:'-',txt:'Cadangan hormon habis sebelum sel folikel pulih. ESR dan CRP sudah kembali normal.',cand:'Terapi levothyroxine bila bergejala.'},
+    {id:'dq3',n:'De Quervain fase 3',tsh:50,t:50,rai:'Normal',txt:'Sel folikel pulih dan fungsi kembali normal. Seluruh episode self-limiting.',cand:'Sembuh.'}
+  ];
+  var setM1=makeMeters($('meters1'),[{key:'tsh',label:'TSH',lab:tshLab},{key:'t',label:'T3 dan T4'}]);
+  var sT=$('s-tsh'),sH=$('s-t'),fb=$('fb'),vd=$('verdict'),pr=$('presets');
+  P.forEach(function(p){
+    var b=document.createElement('button');b.type='button';b.className='chip';b.textContent=p.n;b.setAttribute('aria-pressed','false');b.dataset.id=p.id;
+    pr.appendChild(b);
+  });
+  function press(id){[].forEach.call(pr.children,function(b){b.setAttribute('aria-pressed',String(b.dataset.id===id));});}
+  function show(title,txt,rai,cand){
+    var h='<h3>'+title+'</h3><p>'+txt+'</p>';
+    if(rai)h+='<p class="kv"><b>RAI uptake:</b> '+rai+'</p>';
+    if(cand)h+='<p class="kv"><b>Petunjuk lain:</b> '+cand+'</p>';
+    vd.innerHTML=h;
+  }
+  function classify(tsh,t){
+    if(tsh<30&&t>70)return['Pola hyperthyroid','TSH turun, T3 dan T4 naik.','Tergantung penyebab: tinggi diffuse (Graves), focal (toxic adenoma), heterogeneous (toxic MNG), atau turun (hashitoxicosis, De Quervain fase 1).','Kandidat: Graves, toxic adenoma, toxic MNG, hashitoxicosis, De Quervain fase 1. Bedakan lewat bentuk leher, bruit, nyeri, dan RAI uptake.'];
+    if(tsh>70&&t<30)return['Pola overt hypothyroid','TSH naik, T3 dan T4 turun.','','Kandidat: Hashimoto lanjut, De Quervain fase 2, Riedel. Bedakan lewat nyeri, kekerasan leher, dan antibodi.'];
+    if(tsh>70&&t>=30&&t<=70)return['Pola subclinical hypothyroid','TSH naik, T3 dan T4 masih normal.','','Kandidat: Hashimoto fase progresi.'];
+    if(tsh>=30&&tsh<=70&&t>=30&&t<=70)return['Pola euthyroid','TSH dan T3/T4 berada di rentang normal.','',''];
+    return['Kombinasi tidak khas','Kombinasi ini tidak dibahas di catatan. Coba geser T3/T4 dan TSH berlawanan arah, seperti pada kelainan kelenjar tiroid.','',''];
+  }
+  function manual(){
+    setM1({tsh:+sT.value,t:+sH.value});
+    var c=classify(+sT.value,+sH.value);show(c[0],c[1],c[2],c[3]);
+  }
+  pr.addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b)return;
+    var p=P.filter(function(x){return x.id===b.dataset.id;})[0];
+    sT.value=p.tsh;sH.value=p.t;setM1({tsh:p.tsh,t:p.t});press(p.id);
+    show(p.n,p.txt,p.rai==='-'?'':p.rai,p.cand);
+  });
+  sT.addEventListener('input',function(){press('');manual();});
+  sH.addEventListener('input',function(){
+    if(fb.checked)sT.value=100-sH.value;
+    press('');manual();
+  });
+  fb.addEventListener('change',function(){if(fb.checked){sT.value=100-sH.value;press('');manual();}});
+  manual();
+
+  /* 2. Graves stepper */
+  var GS=[
+    {t:'Keadaan normal',x:'TSH dari hipofisis menyuruh tiroid bekerja. Hormon cukup dan TSH seimbang.',v:{tsi:0,hor:50,size:45,tsh:50}},
+    {t:'Defek pada sel T-suppressor',x:'Pengatur sistem imun melemah, sehingga sel B lepas kendali.',v:{tsi:6,hor:50,size:45,tsh:50}},
+    {t:'Sel B membuat TSI',x:'TSI (thyroid stimulating immunoglobulin) mulai beredar. Pemicunya antara lain kehamilan (terutama postpartum), iodine berlebih, infeksi, stres emosional, dan rokok.',v:{tsi:45,hor:52,size:46,tsh:48}},
+    {t:'TSI menempel di reseptor TSH',x:'Seperti kunci palsu yang terus membuka: reseptor menyala tanpa menunggu TSH.',v:{tsi:80,hor:68,size:55,tsh:36}},
+    {t:'Hormon naik, kelenjar tumbuh',x:'Sintesis hormon tiroid naik dan sel tiroid bertambah. TSH ditekan oleh umpan balik.',v:{tsi:90,hor:86,size:75,tsh:18}},
+    {t:'Hasil klinis',x:'Hyperthyroidism dan thyromegaly: leher diffuse dengan bruit, sering disertai exophthalmos yang pathognomonic untuk Graves.',v:{tsi:95,hor:94,size:90,tsh:8}}
+  ];
+  var setM2=makeMeters($('meters2'),[
+    {key:'tsi',label:'TSI di darah',lab:function(v){return v<20?'Belum ada':(v>70?'Banyak':'Beredar');}},
+    {key:'hor',label:'Hormon tiroid (T3 dan T4)'},
+    {key:'size',label:'Ukuran kelenjar',lab:function(v){return v<=50?'Normal':'Membesar';}},
+    {key:'tsh',label:'TSH',lab:tshLab}
+  ]);
+  var gi=0,gd=$('gdots');
+  GS.forEach(function(){gd.appendChild(document.createElement('i'));});
+  function gdraw(){
+    var s=GS[gi];$('gt').textContent=(gi+1)+'. '+s.t;$('gx').textContent=s.x;setM2(s.v);
+    [].forEach.call(gd.children,function(d,k){d.className=k<=gi?'on':'';});
+    $('gprev').disabled=gi===0;$('gnext').disabled=gi===GS.length-1;
+  }
+  $('gprev').addEventListener('click',function(){if(gi>0){gi--;gdraw();}});
+  $('gnext').addEventListener('click',function(){if(gi<GS.length-1){gi++;gdraw();}});
+  $('grst').addEventListener('click',function(){gi=0;gdraw();});
+  gdraw();
+
+  /* 3. De Quervain chart */
+  var H=[[0,50],[1,88],[3,62],[4,40],[7,20],[11,22],[14,36],[16,50],[20,50]];
+  function hAt(w){for(var i=1;i<H.length;i++){if(w<=H[i][0]){var a=H[i-1],b=H[i];return a[1]+(b[1]-a[1])*(w-a[0])/(b[0]-a[0]);}}return 50;}
+  function tAt(w){return 100-hAt(w);}
+  function X(w){return 48+w/20*572;}
+  function Y(v){return 216-v/100*188;}
+  function path(fn){var d='';for(var w=0;w<=20.001;w+=0.25){d+=(d?'L':'M')+X(w).toFixed(1)+' '+Y(fn(w)).toFixed(1);}return d;}
+  var sv=$('dq');
+  var g='';
+  g+='<rect x="'+X(0)+'" y="28" width="'+(X(3)-X(0))+'" height="188" style="fill:var(--coral);opacity:.12"/>';
+  g+='<rect x="'+X(3)+'" y="28" width="'+(X(15)-X(3))+'" height="188" style="fill:var(--teal);opacity:.10"/>';
+  g+='<rect x="48" y="'+Y(70)+'" width="572" height="'+(Y(30)-Y(70))+'" style="fill:var(--muted);opacity:.14"/>';
+  g+='<text class="ph" x="'+((X(0)+X(3))/2)+'" y="20" text-anchor="middle">Fase 1</text>';
+  g+='<text class="ph" x="'+((X(3)+X(15))/2)+'" y="20" text-anchor="middle">Fase 2</text>';
+  g+='<text class="ph" x="'+((X(15)+X(20))/2)+'" y="20" text-anchor="middle">Fase 3</text>';
+  [0,5,10,15,20].forEach(function(w){g+='<text x="'+X(w)+'" y="232" text-anchor="middle">'+w+'</text>';});
+  g+='<text x="334" y="247" text-anchor="middle">minggu sejak onset</text>';
+  g+='<text x="4" y="40">tinggi</text><text x="4" y="214">rendah</text>';
+  g+='<path d="'+path(hAt)+'" fill="none" stroke-width="3.5" stroke-linecap="round" style="stroke:var(--coral)"/>';
+  g+='<path d="'+path(tAt)+'" fill="none" stroke-width="3" stroke-dasharray="7 5" stroke-linecap="round" style="stroke:var(--teal)"/>';
+  g+='<line id="dqm" x1="48" x2="48" y1="28" y2="216" stroke-width="1.5" style="stroke:var(--fg)"/>';
+  g+='<circle id="dqc1" r="6" cx="48" cy="0" style="fill:var(--coral)"/><circle id="dqc2" r="6" cx="48" cy="0" style="fill:var(--teal)"/>';
+  sv.innerHTML=g;
+  var PH=[
+    {t:'Fase 1: thyrotoxicosis',x:'Folikel robek oleh radang akut (giant cells dan lymphocytes) dan hormon tersimpan bocor keluar. Produksi tidak naik, jadi RAI uptake turun. Nyeri leher, demam, ESR dan CRP naik.'},
+    {t:'Fase 2: hypothyroidism',x:'Cadangan hormon habis sebelum sel folikel pulih. ESR dan CRP kembali normal. Levothyroxine bila bergejala.'},
+    {t:'Fase 3: euthyroid',x:'Sel folikel pulih dan fungsi kembali normal. Seluruh episode sembuh sendiri dalam 1 sampai 3 bulan.'}
+  ];
+  function dqdraw(){
+    var w=parseFloat($('wk').value);$('wkv').textContent=w;
+    var h=hAt(w),t=tAt(w);
+    $('dqm').setAttribute('x1',X(w));$('dqm').setAttribute('x2',X(w));
+    $('dqc1').setAttribute('cx',X(w));$('dqc1').setAttribute('cy',Y(h));
+    $('dqc2').setAttribute('cx',X(w));$('dqc2').setAttribute('cy',Y(t));
+    var p=w<3?PH[0]:(w<15?PH[1]:PH[2]);
+    $('dqv').innerHTML='<h3>'+p.t+'</h3><p>'+p.x+'</p><p class="kv"><b>Minggu '+w+':</b> T3/T4 '+band(h).toLowerCase()+', TSH '+tshLab(t).toLowerCase()+'.</p>';
+  }
+  $('wk').addEventListener('input',dqdraw);
+  dqdraw();
+
+  /* Pasien virtual */
+  var D=[['tgc','Thyroglossal cyst'],['goitre','Simple goitre'],['adenoma','Toxic adenoma'],['mng','Toxic MNG'],['graves','Graves disease'],['hashi','Hashimoto'],['dq','De Quervain'],['riedel','Riedel']];
+  var NAME={};D.forEach(function(d){NAME[d[0]]=d[1];});
+  var CASES=[
+    {a:'graves',c:['Perempuan 28 tahun. Tiga bulan terakhir berat badan turun walau makan banyak, tidak tahan panas, jantung berdebar.','Nadi cepat, tremor halus, kulit hangat dan lembap. Leher membesar merata dan terdengar bruit. Mata tampak menonjol.','TSH turun, T3 dan T4 naik. TRAb (TSI) positif.','USG hypervascular. RAI uptake tinggi dan diffuse.'],e:'Pembesaran diffuse dengan bruit plus exophthalmos khas Graves. Exophthalmos pathognomonic untuk Graves.'},
+    {a:'tgc',c:['Benjolan di leher depan yang sudah lama ada. Tidak ada gejala hormon.','Benjolan di garis tengah dekat tulang hyoid. Naik saat pasien menelan dan saat lidah dijulurkan.','TFT normal.','USG leher: kista di garis tengah.'],e:'Benjolan midline dekat hyoid yang ikut bergerak dengan lidah dan menelan adalah thyroglossal cyst. Terapinya Sistrunk procedure.'},
+    {a:'goitre',c:['Perempuan dengan leher membesar perlahan. Tidak ada gejala hormon. Asupan iodine selama ini kurang.','Leher halus, kenyal, tidak nyeri, bergerak saat menelan. Tidak ada bruit. Pasien euthyroid.','TFT normal, antibodi tiroid negatif.','USG: pembesaran diffuse tanpa nodul mencurigakan.'],e:'Pembesaran jinak pada pasien euthyroid dengan antibodi negatif adalah simple goitre. Iodine deficiency penyebab utamanya.'},
+    {a:'adenoma',c:['Berdebar, berat badan turun, tidak tahan panas. Tidak ada keluhan mata.','Satu nodul teraba di lobus kanan. Tidak ada bruit.','TSH turun, T3 dan T4 naik.','USG: nodul iso/hyperechoic. RAI uptake focal (hot nodule).'],e:'Satu nodul tanpa bruit dengan hot nodule di RAI adalah toxic adenoma.'},
+    {a:'mng',c:['Perempuan di atas 50 tahun, perokok, dengan gejala hyperthyroid ringan.','Pembesaran multinodular tanpa bruit dan tanpa exophthalmos.','TSH turun, T3 dan T4 naik.','USG multinodular. RAI uptake heterogeneous.'],e:'Multinodular tanpa bruit dengan uptake heterogeneous pada usia di atas 50 tahun adalah toxic MNG (Plummer disease).'},
+    {a:'hashi',c:['Perempuan dengan leher membesar perlahan dan mudah lelah. Ada riwayat penyakit autoimun lain di keluarga.','Leher kenyal seperti karet, halus, tepi jelas, bergerak saat menelan. Kelenjar getah bening tidak membesar.','TSH naik, free T3 dan T4 turun. Antibodi thyroid peroxidase dan thyroglobulin positif.','USG: diffuse hypoechogenicity.'],e:'Autoimun, leher kenyal seperti karet, dan antibodi positif dengan hypothyroidism adalah Hashimoto. Terapinya levothyroxine seumur hidup.'},
+    {a:'dq',c:['Dua minggu setelah batuk pilek, demam dan leher depan bengkak mendadak. Nyeri menjalar ke telinga dan memberat saat menelan.','Leher diffuse, firm, dan nyeri tekan.','TSH turun, T3 dan T4 naik. ESR, CRP, dan serum thyroglobulin naik.','USG hypoechoic dengan vaskularisasi rendah dan tepi kabur. RAI uptake turun.'],e:'Nyeri akut setelah URTI dengan thyrotoxicosis dan RAI uptake rendah adalah De Quervain fase 1. Hormon bocor dari simpanan, bukan produksi yang naik.'},
+    {a:'riedel',c:['Benjolan leher tumbuh lambat dan tidak nyeri. Mulai sesak dan sulit menelan.','Massa sekeras batu dengan tepi tidak rata. Bergerak saat menelan tetapi sebagian melekat ke jaringan sekitar.','TSH naik, T3 dan T4 turun.','USG: massa hypoechoic dan hypovascular yang menembus jaringan di luar tiroid dan membungkus pembuluh carotid.'],e:'Sekeras batu, tidak nyeri, dan melekat adalah Riedel. Kelenjar digantikan jaringan fibrosa padat. Biopsi perlu untuk menyingkirkan keganasan.'},
+    {a:'graves',c:['Perempuan 31 tahun, dua bulan setelah melahirkan. Cemas, sulit tidur, berat badan turun.','Nadi cepat, hyperreflexia, bercak merah menonjol di tulang kering. Leher diffuse dengan bruit.','TSH turun, T3 dan T4 naik.','RAI uptake tinggi dan diffuse.'],e:'Kehamilan, terutama postpartum, bisa memicu respons imun Graves. Pretibial myxoedema dan bruit mengarah ke Graves.'},
+    {a:'dq',c:['Enam minggu lalu nyeri leher setelah flu. Kini nyerinya reda tetapi pasien merasa sangat lelah.','Leher masih agak membesar dan kenyal.','TSH naik, T3 dan T4 turun. ESR dan CRP sudah normal.','USG: hypoechoic diffuse.'],e:'Ini fase hypothyroid De Quervain. ESR dan CRP sudah kembali normal ketika fase hypo muncul. Fase ini sembuh sendiri.'},
+    {a:'tgc',c:['Benjolan di leher depan tiba-tiba nyeri dan memerah.','Benjolan garis tengah dekat hyoid yang bergerak saat menelan dan lidah dijulurkan. Nyeri tekan.','Leukosit (WCC) naik.','USG: kista di garis tengah dengan tanda infeksi.'],e:'Thyroglossal cyst yang terinfeksi bisa menjadi abscess. Sistrunk procedure mencegah infeksi berulang.'},
+    {a:'hashi',c:['Perempuan dengan benjolan leher yang muncul cepat dan hilang timbul nyeri. Ukurannya berubah-ubah.','Leher halus dengan tepi jelas dan kenyal seperti karet. Kulit di atasnya terasa hangat.','TSH turun, free T3 dan T4 naik. Antibodi TPO positif.','RAI uptake turun.'],e:'Awal Hashimoto bisa berupa hashitoxicosis: hormon bocor dari sel yang rusak, jadi uptake RAI turun dan antibodi positif.'}
+  ];
+  var G=$('game'),st={};
+  var LAB=['Keluhan','Pemeriksaan fisik','Laboratorium','Pencitraan'];
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function best(){try{return parseInt(localStorage.getItem('tiroid-best')||'0',10)||0;}catch(e){return 0;}}
+  function saveBest(v){try{if(v>best())localStorage.setItem('tiroid-best',String(v));}catch(e){}}
+  function start(){st={order:shuffle(CASES.map(function(_,i){return i;})),i:0,shown:1,score:0,picked:null,gain:0};draw();}
+  function draw(){
+    var max=CASES.length*4;
+    if(st.i>=st.order.length){
+      saveBest(st.score);
+      var pct=st.score/max;
+      var msg=pct>=.75?'Sangat baik. Kamu mengenali pola penyakitnya dengan sedikit petunjuk.':(pct>=.5?'Cukup baik. Ulangi kasus yang salah dengan membaca bab mekanismenya.':'Masih perlu latihan. Buka lagi tabel pembeda dan simulator TFT, lalu coba lagi.');
+      G.innerHTML='<h3>Selesai</h3><p class="score"><span>Skor <b>'+st.score+'</b> dari '+max+'</span><span>Terbaik <b>'+best()+'</b></span></p><p style="color:var(--muted)">'+msg+'</p><div class="stepper"><button class="btn" type="button" data-act="restart">Main lagi</button></div>';
+      return;
+    }
+    var c=CASES[st.order[st.i]],done=st.picked!==null;
+    var h='<div class="score"><span>Kasus <b>'+(st.i+1)+'</b> dari '+CASES.length+'</span><span>Skor <b>'+st.score+'</b> dari '+max+'</span><span>Terbaik <b>'+best()+'</b></span></div>';
+    var n=done?4:st.shown;
+    h+='<ul class="clues">';
+    for(var k=0;k<n;k++)h+='<li><span class="tag">'+LAB[k]+'</span><p>'+c.c[k]+'</p></li>';
+    h+='</ul>';
+    if(!done){
+      h+='<div class="stepper"><button class="btn ghost" type="button" data-act="clue"'+(st.shown>=4?' disabled':'')+'>Petunjuk berikutnya</button></div>';
+      h+='<p class="hint">Bila benar sekarang: '+(5-st.shown)+' poin.</p>';
+    }
+    h+='<div class="opts">';
+    D.forEach(function(d){
+      var k2='opt',suf='';
+      if(done){
+        if(d[0]===c.a){k2+=' right';suf='<small>jawaban benar</small>';}
+        else if(d[0]===st.picked){k2+=' wrong';suf='<small>pilihanmu</small>';}
+      }
+      h+='<button type="button" class="'+k2+'" data-act="pick" data-id="'+d[0]+'"'+(done?' disabled':'')+'>'+d[1]+suf+'</button>';
+    });
+    h+='</div>';
+    if(done){
+      var ok=st.picked===c.a;
+      h+='<div class="fb" aria-live="polite"><p><strong>'+(ok?'Benar. +'+st.gain+' poin.':'Belum tepat. Jawabannya '+NAME[c.a]+'.')+'</strong> '+c.e+'</p></div>';
+      h+='<div class="stepper"><button class="btn" type="button" data-act="next">'+(st.i===CASES.length-1?'Lihat hasil':'Kasus berikutnya')+'</button></div>';
+    }
+    G.innerHTML=h;
+  }
+  G.addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b)return;
+    var a=b.dataset.act;
+    if(a==='clue'&&st.shown<4){st.shown++;draw();}
+    else if(a==='pick'&&st.picked===null){
+      var c=CASES[st.order[st.i]];st.picked=b.dataset.id;
+      st.gain=st.picked===c.a?5-st.shown:0;st.score+=st.gain;draw();
+    }
+    else if(a==='next'){st.i++;st.shown=1;st.picked=null;st.gain=0;draw();}
+    else if(a==='restart'){start();}
+  });
+  start();
+
+  /* Mode hafalan */
+  var sb=$('studyBtn');
+  sb.addEventListener('click',function(){
+    var on=!document.body.classList.contains('study');
+    document.body.classList.toggle('study',on);
+    [].forEach.call(document.querySelectorAll('.rev'),function(n){n.classList.remove('rev');});
+    sb.setAttribute('aria-pressed',String(on));
+    sb.textContent=on?'Mode hafalan: nyala (klik baris untuk membuka)':'Mode hafalan: mati';
+  });
+  document.addEventListener('click',function(e){
+    if(!document.body.classList.contains('study'))return;
+    var row=e.target.closest('.r, tbody tr');
+    if(row)row.classList.toggle('rev');
+  });
+})();
+</script>
+
+</html>
