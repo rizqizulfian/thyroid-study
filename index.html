@@ -152,6 +152,16 @@ input[type=range]{width:100%;accent-color:var(--teal)}
 .dots{display:flex;gap:6px}
 .dots i{width:100%;max-width:36px;height:6px;border-radius:3px;background:var(--line)}
 .dots i.on{background:var(--coral)}
+
+.grp{display:flex;flex-direction:column;gap:6px}
+.grp>b{font-size:14px;color:var(--muted)}
+.bw-bar{height:16px;border-radius:99px;background:var(--surface-2);border:1px solid var(--line);position:relative;overflow:hidden}
+.bw-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;transition:width .3s,background-color .3s}
+.bw-bar u{position:absolute;top:0;bottom:0;width:2px;background:var(--fg);opacity:.5}
+.bw-big{font-family:var(--display);font-size:44px;font-weight:700;line-height:1}
+.nod{width:100%;height:auto;display:block;background:var(--surface-2);border:1px solid var(--line);border-radius:12px}
+.nod text{fill:var(--faint);font-size:12px;font-family:var(--body)}
+@media (prefers-reduced-motion: reduce){.bw-bar i{transition:none}}
 .chart{width:100%;height:auto;display:block}
 .chart text{fill:var(--faint);font-size:12px;font-family:var(--body)}
 .chart text.ph{fill:var(--fg);font-weight:700}
@@ -223,7 +233,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--line);color:var(--fain
 
 <section class="chap" id="simulasi">
   <header><p class="eyebrow">Interaktif</p><h2>Lab simulasi: mainkan hormonnya</h2>
-  <p>Tiga simulasi kecil untuk memahami mengapa TFT berubah. Angkanya skala relatif 0 sampai 100, bukan nilai laboratorium.</p></header>
+  <p>Lima simulasi kecil. Tiga yang pertama menjelaskan mengapa TFT berubah (angkanya skala relatif 0 sampai 100, bukan nilai laboratorium). Dua yang terakhir melatih keputusan klinis: thyroid storm dan kapan nodul perlu FNAC.</p></header>
 
   <h3>1. Simulator TFT</h3>
   <div class="sim">
@@ -263,6 +273,47 @@ footer{padding-block:40px 64px;border-top:1px solid var(--line);color:var(--fain
     <svg id="dq" class="chart" viewBox="0 0 640 250" role="img" aria-label="Kurva skematis T3/T4 dan TSH selama tiga fase De Quervain"></svg>
     <p class="hint">Garis tebal utuh adalah T3/T4. Garis putus-putus adalah TSH. Kurva berupa skema; lamanya fase mengikuti catatan: fase 1 sekitar 2 sampai 3 minggu, fase 2 sekitar 6 sampai 12 minggu.</p>
     <div class="verdict" id="dqv" aria-live="polite"></div>
+  </div>
+
+  <h3 style="margin-top:36px">4. Kalkulator thyroid storm (skor Burch-Wartofsky)</h3>
+  <div class="sim">
+    <div class="panel">
+      <label class="sl" for="bw-t">Suhu: <span id="bw-tv">37,0</span> &deg;C<input type="range" id="bw-t" min="36" max="41" step="0.1" value="37"></label>
+      <label class="sl" for="bw-h">Denyut jantung: <span id="bw-hv">80</span> x/menit<input type="range" id="bw-h" min="60" max="170" step="1" value="80"></label>
+      <div class="grp"><b>Gangguan SSP</b><div class="chips" data-bw="cns"></div></div>
+      <div class="grp"><b>Gangguan saluran cerna dan hati</b><div class="chips" data-bw="gi"></div></div>
+      <div class="grp"><b>Gagal jantung</b><div class="chips" data-bw="chf"></div></div>
+      <label class="ck" for="bw-af"><input type="checkbox" id="bw-af">Atrial fibrillation (+10)</label>
+      <label class="ck" for="bw-pr"><input type="checkbox" id="bw-pr">Ada pencetus, mis. infeksi, operasi, putus obat (+10)</label>
+    </div>
+    <div class="panel">
+      <p class="bw-big" id="bw-n">0</p>
+      <div class="bw-bar" aria-hidden="true"><i id="bw-f"></i><u style="left:20.8%"></u><u style="left:37.5%"></u></div>
+      <div class="verdict" id="bw-v" aria-live="polite"></div>
+      <p class="hint">Skor maksimum 140. Garis di bar menandai batas 25 dan 45. Catatan kuliah hanya menyebut skor ini untuk thyroid storm; rincian poin dan batasnya diambil dari rujukan standar, jadi cocokkan dengan slide dosenmu.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:36px">5. USG nodul tiroid: perlu FNAC atau tidak?</h3>
+  <div class="sim">
+    <div class="panel">
+      <div class="grp"><b>Komposisi nodul</b><div class="chips" data-nd="comp"></div></div>
+      <div class="grp"><b>Echogenicity</b><div class="chips" data-nd="echo"></div></div>
+      <div class="grp"><b>Tanda pada USG</b>
+        <label class="ck"><input type="checkbox" data-nf="margin">Tepi tidak rata</label>
+        <label class="ck"><input type="checkbox" data-nf="vasc">Vaskularisasi internal meningkat</label>
+        <label class="ck"><input type="checkbox" data-nf="tall">Lebih tinggi daripada lebar</label>
+        <label class="ck"><input type="checkbox" data-nf="calc">Mikrokalsifikasi tersebar</label>
+        <label class="ck"><input type="checkbox" data-nf="ete">Menembus kapsul tiroid</label>
+        <label class="ck"><input type="checkbox" data-nf="shadow">Bayangan di belakang nodul</label>
+      </div>
+      <label class="ck"><input type="checkbox" data-nf="ln">Kelenjar getah bening mencurigakan</label>
+    </div>
+    <div class="panel">
+      <svg id="nod" class="nod" viewBox="0 0 320 200" role="img" aria-label="Gambar skematis nodul tiroid pada USG"></svg>
+      <div class="verdict" id="nd-v" aria-live="polite"></div>
+      <p class="hint">Aturan dari catatan: FNAC bila ada kelenjar getah bening mencurigakan, atau nodul solid hypoechoic disertai salah satu tanda. Gambar hanya skema.</p>
+    </div>
   </div>
 </section>
 
@@ -739,6 +790,87 @@ footer{padding-block:40px 64px;border-top:1px solid var(--line);color:var(--fain
     else if(a==='restart'){start();}
   });
   start();
+
+
+  /* Simulator 4: Burch-Wartofsky */
+  var BW={
+    cns:[['Tidak ada',0],['Ringan: agitasi',10],['Sedang: delirium, psikosis, sangat lemas',20],['Berat: kejang, koma',30]],
+    gi:[['Tidak ada',0],['Sedang: diare, mual, muntah, nyeri perut',10],['Berat: ikterus tanpa sebab jelas',20]],
+    chf:[['Tidak ada',0],['Ringan: edema kaki',5],['Sedang: ronki basah basal',10],['Berat: edema paru',15]]
+  };
+  var bwS={cns:0,gi:0,chf:0};
+  function bwTemp(t){return t>=40?30:t>=39.4?25:t>=38.9?20:t>=38.3?15:t>=37.8?10:t>=37.2?5:0;}
+  function bwHr(h){return h>=140?25:h>=130?20:h>=120?15:h>=110?10:h>=90?5:0;}
+  function bwDraw(){
+    [].forEach.call(document.querySelectorAll('[data-bw]'),function(g){
+      var k=g.dataset.bw;
+      if(!g.firstChild){BW[k].forEach(function(o,i){var b=document.createElement('button');b.type='button';b.className='chip';b.dataset.i=i;b.textContent=o[0]+' (+'+o[1]+')';g.appendChild(b);});}
+      [].forEach.call(g.children,function(b){b.setAttribute('aria-pressed',String(+b.dataset.i===bwS[k]));});
+    });
+    var t=parseFloat($('bw-t').value),h=parseInt($('bw-h').value,10);
+    $('bw-tv').textContent=t.toFixed(1).replace('.',',');$('bw-hv').textContent=h;
+    var sc=bwTemp(t)+bwHr(h)+BW.cns[bwS.cns][1]+BW.gi[bwS.gi][1]+BW.chf[bwS.chf][1]+($('bw-af').checked?10:0)+($('bw-pr').checked?10:0);
+    $('bw-n').textContent=sc;
+    var f=$('bw-f');f.style.width=Math.min(100,sc/140*100)+'%';
+    var col=sc>=45?'var(--coral)':sc>=25?'var(--amber)':'var(--teal)';f.style.backgroundColor=col;
+    var ti,tx;
+    if(sc>=45){ti='Sangat mendukung thyroid storm';tx='Ini kegawatan. Butuh perawatan intensif, obat antitiroid, beta-blocker, dan mencari serta menangani pencetusnya.';}
+    else if(sc>=25){ti='Mengancam thyroid storm (impending)';tx='Belum penuh, tetapi bisa memburuk. Pantau ketat dan terapi agresif.';}
+    else{ti='Thyroid storm kecil kemungkinannya';tx='Tetap cari penyebab keluhan dan ulangi penilaian bila kondisi berubah.';}
+    $('bw-v').innerHTML='<h3>'+ti+'</h3><p>'+tx+'</p>';
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-bw] .chip');if(!b)return;
+    bwS[b.parentNode.dataset.bw]=+b.dataset.i;bwDraw();
+  });
+  ['bw-t','bw-h','bw-af','bw-pr'].forEach(function(id){$(id).addEventListener('input',bwDraw);});
+  bwDraw();
+
+  /* Simulator 5: nodul dan FNAC */
+  var NDO={comp:[['Solid','solid'],['Kistik','cyst'],['Campuran','mix']],echo:[['Hypoechoic','hypo'],['Isoechoic','iso'],['Hyperechoic','hyper']]};
+  var nd={comp:'solid',echo:'hypo'};
+  var NDN={margin:'tepi tidak rata',vasc:'vaskularisasi internal meningkat',tall:'lebih tinggi daripada lebar',calc:'mikrokalsifikasi tersebar',ete:'menembus kapsul',shadow:'bayangan di belakang nodul'};
+  function ndDraw(){
+    [].forEach.call(document.querySelectorAll('[data-nd]'),function(g){
+      var k=g.dataset.nd;
+      if(!g.firstChild){NDO[k].forEach(function(o){var b=document.createElement('button');b.type='button';b.className='chip';b.dataset.v=o[1];b.textContent=o[0];g.appendChild(b);});}
+      [].forEach.call(g.children,function(b){b.setAttribute('aria-pressed',String(b.dataset.v===nd[k]));});
+    });
+    var f={};[].forEach.call(document.querySelectorAll('[data-nf]'),function(c){f[c.dataset.nf]=c.checked;});
+    var tall=f.tall,w=tall?60:96,h=tall?90:62,cx=160,cy=100;
+    var fill=nd.comp==='cyst'?'#0000':'currentColor';
+    var shade=nd.echo==='hypo'?'#1a1a1a':nd.echo==='iso'?'#777':'#d6d6d6';
+    var o='<rect x="0" y="0" width="320" height="200" fill="#8a8a8a" opacity=".25"/>';
+    if(f.shadow)o+='<rect x="'+(cx-w/2)+'" y="'+(cy+h/2)+'" width="'+w+'" height="'+(200-cy-h/2)+'" fill="#000" opacity=".35"/>';
+    var shape;
+    if(f.margin){
+      var pts=[],n=18;for(var i=0;i<n;i++){var a=i/n*Math.PI*2,r=1+(i%2?0.18:-0.04)*(i%3+1);pts.push((cx+Math.cos(a)*w/2*r).toFixed(1)+','+(cy+Math.sin(a)*h/2*r).toFixed(1));}
+      shape='<polygon points="'+pts.join(' ')+'"';
+    }else shape='<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+w/2+'" ry="'+h/2+'"';
+    var sf=nd.comp==='cyst'?'#050505':shade;
+    o+=shape+' fill="'+sf+'" stroke="'+(f.ete?'#E8A557':'#bbb')+'" stroke-width="'+(f.ete?4:1.5)+'"/>';
+    if(nd.comp==='mix')o+='<ellipse cx="'+(cx-w*0.15)+'" cy="'+(cy-h*0.1)+'" rx="'+w*0.18+'" ry="'+h*0.2+'" fill="#050505"/>';
+    if(f.ete)o+='<path d="M'+(cx+w/2-6)+' '+(cy-8)+' l22 -10 M'+(cx+w/2-4)+' '+(cy+6)+' l24 6" stroke="#E8A557" stroke-width="3" fill="none"/>';
+    if(f.calc)[[-18,-8],[6,10],[22,-14],[-6,14],[14,2],[-26,8]].forEach(function(p){o+='<circle cx="'+(cx+p[0]*(w/96))+'" cy="'+(cy+p[1]*(h/62))+'" r="2" fill="#fff"/>';});
+    if(f.vasc)o+='<path d="M'+(cx-w*0.3)+' '+(cy+h*0.2)+' q12 -18 24 -4 t26 -6" stroke="#FF8A6B" stroke-width="2.5" fill="none"/>';
+    if(f.ln)o+='<ellipse cx="270" cy="50" rx="18" ry="11" fill="#2a2a2a" stroke="#E8A557" stroke-width="2"/><text x="248" y="32">KGB</text>';
+    o+='<text x="8" y="192">Skema USG, bukan gambar asli</text>';
+    $('nod').innerHTML=o;
+    var sus=[];Object.keys(NDN).forEach(function(k){if(f[k])sus.push(NDN[k]);});
+    var solidHypo=nd.comp==='solid'&&nd.echo==='hypo';
+    var ti,tx;
+    if(f.ln){ti='FNAC: ya';tx='Ada kelenjar getah bening mencurigakan, jadi FNAC dianjurkan' +(sus.length?' (juga ada tanda: '+sus.join(', ')+').':'.');}
+    else if(solidHypo&&sus.length){ti='FNAC: ya';tx='Nodul solid hypoechoic dengan tanda mencurigakan: '+sus.join(', ')+'.';}
+    else if(solidHypo){ti='FNAC: belum dari kriteria ini';tx='Nodul solid hypoechoic, tetapi belum ada tanda mencurigakan. Tetap perlu tindak lanjut dan pemantauan sesuai klinis.';}
+    else{ti='FNAC: belum dari kriteria ini';tx='Syarat utamanya adalah nodul solid hypoechoic'+(sus.length?'. Tanda yang kamu pilih ('+sus.join(', ')+') belum memenuhi aturan tanpa syarat itu.':'. Centang tanda USG atau ubah komposisi dan echogenicity untuk mencoba.');}
+    $('nd-v').innerHTML='<h3>'+ti+'</h3><p>'+tx+'</p>';
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-nd] .chip');if(!b)return;
+    nd[b.parentNode.dataset.nd]=b.dataset.v;ndDraw();
+  });
+  [].forEach.call(document.querySelectorAll('[data-nf]'),function(c){c.addEventListener('input',ndDraw);});
+  ndDraw();
 
   /* Mode hafalan */
   var sb=$('studyBtn');
